@@ -12,6 +12,9 @@
 
                 {!! Form::close() !!}
             </li>
+            <li>
+                <a href="{{ url('/createactivityform') }}">Crear actividad</a>
+            </li>
         @else
             <li>
                 <button id="loginButton" class="btn-form">Login</button>

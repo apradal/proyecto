@@ -8,7 +8,7 @@
     {{Form::text('email', '', ['placeholder' => 'Ejemplo@gmail.com'])}}
 
     {{Form::label('password', ' ')}}
-    {{Form::text('password', '', ['placeholder' => 'Contraseña secreta'])}}
+    {{Form::password('password', ['placeholder' => 'Contraseña secreta'])}}
 
     {{Form::submit('Iniciar')}}
 

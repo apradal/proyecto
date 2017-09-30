@@ -18,7 +18,6 @@ class CreateActivitiesTable extends Migration
             $table->increments('id');
             $table->string('titulo');
             $table->mediumText('descripcion');
-            $table->date('fecha_creacion');
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
             $table->string('tipo');

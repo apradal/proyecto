@@ -26,4 +26,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * Get the activities associated by id
+     */
+    public function activities(){
+                                    //'App\Activity'
+        return $this->belongsToMany(Activity::class);
+    }
 }

@@ -11,10 +11,22 @@
 |
 */
 
+/** INDEX **/
 Route::get('/', 'MainController@getIndex');
 
+/** USER STUFF **/
 Route::post('/registeruser', 'FormsController@submitRegisterUser');
 
 Route::post('/loginuser', 'FormsController@submitLoginUser');
 
 Route::post('/logoutuser', 'FormsController@submitLogoutUser');
+
+/** ACTIVITY STUFF **/
+//es llamado por un hiperlink, tiene que ser get. {{ url('/createactivity') }}.
+Route::get('/createactivityform', 'MainController@createActivity');
+
+Route::get('/createactivty', 'ActivitiesController@create');
+
+Route::get('/prueba', 'MainController@pruebas');
+
+
