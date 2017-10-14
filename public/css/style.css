@@ -1,11 +1,12 @@
 #loginForm{
-
     display: none;
-
 }
-
 #registerForm{
-
     display: none;
-
+}
+#joinActivity{
+    display: none;
+}
+#leaveActivity{
+    display: none;
 }

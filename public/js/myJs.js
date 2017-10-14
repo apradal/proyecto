@@ -4,12 +4,13 @@ Activeko.form = {
     
     init : function () {
         this.listeners();
-        this.ajaxRegisterUser();
-        this.ajaxLoginUser();
+        this.ajaxs();
     },
     listeners : function () {
+        /**
+         * Shows and Hide the forms to register and log
+         */
         $(document).on('click', '.btn-form', function (event) {
-
             var loginForm = $('#loginForm'),
                 registerForm = $('#registerForm');
             
@@ -26,8 +27,51 @@ Activeko.form = {
                     break;
             }
         });
+        /**
+         * Shows the popup joinActivity
+         * and put the name and the id of an Activity
+         */
+        $(document).on('click', '.joinButton', function (event) {
+            var joinActivity = $('#joinActivity'),
+                activityId = $('#activityId');
+            $getActivityTitle = $('#'+ event.target.id).prev().children('h2').html();
+            $('#joinActivityTitle').html('Está apunto de unirse a la actividad: ' + $getActivityTitle);
+            activityId.val(event.target.id);
+            joinActivity.css({ 'display' : 'block'});
+        });
+        /**
+         * Hides the popup joinActivity
+         * Simulates cancel.
+         */
+        $(document).on('click', '#cancelJoinActivity', function (event) {
+            var joinActivity = $('#joinActivity');
+            joinActivity.css({ 'display': "none" });
+        });
+        /**
+         * show the popu leaveActivity
+         * and put the name and the id of an Activity
+         */
+        $(document).on('click', '.leaveButton', function (event) {
+            var leaveActivity = $('#leaveActivity'),
+                activityId = $('#leaveActivityId');
+            $getActivityTitle = $('#'+ event.target.id).prev().children('h2').html();
+            $('#joinActivityTitle').html('Está apunto de salirse de la actividad: ' + $getActivityTitle);
+            activityId.val(event.target.id);
+            leaveActivity.css({ 'display' : 'block'});
+        });
+        /**
+         * Hides the popup leaveActivity
+         * Simulates cancel.
+         */
+        $(document).on('click', '#cancelLeaveActivity', function (event) {
+            var leaveActivity = $('#leaveActivity');
+            leaveActivity.css({ 'display': "none" });
+        });
     }, // END Listeners
-    ajaxRegisterUser : function () {
+    ajaxs : function () {
+        /**
+         * Ajax which let you register an user
+         */
         $(document).on('submit', '#registerUserForm', function (event) {
 
             event.preventDefault();
@@ -64,8 +108,9 @@ Activeko.form = {
             });
 
         });
-    }, // END Ajax
-    ajaxLoginUser : function () {
+        /**
+         * Ajax which let you login.
+         */
         $(document).on('submit', '#loginUserForm', function (event) {
 
             event.preventDefault();
@@ -108,7 +153,77 @@ Activeko.form = {
             });
 
         });
-    }
+        /**
+         * Ajax that let you Join an Activity
+         */
+        $(document).on('submit', '#joinForm', function (event) {
+
+            event.preventDefault();
+
+            var joinAtivity =  $('#joinActivity');
+
+            $.ajax({
+                url: '/joinactivity',
+                data: $('#joinForm').serialize(),
+                type: 'post',
+                dataType: 'json',
+                success: function(response){
+
+                    (response.success === true) ? joinAtivity.html('<h3>Registrado en esta actividad</h3>') : '';
+                    function redirect(){
+                        window.location = '/';
+                    }
+                    setTimeout(redirect, 2000);
+                },
+                error: function(response) { // What to do if we fail
+                    var errors = response.responseJSON;
+                    var html = '';
+
+                    if (errors.success === false){
+                        $.each( errors.errors, function( key, value ) {
+                            html += '<span><p>' + value + '</p></span>';
+                        });
+                        joinAtivity.append(html);
+                    }
+                }
+            });
+
+        });
+
+        $(document).on('submit', '#leaveForm', function (event) {
+
+            event.preventDefault();
+
+            var leaveActivity =  $('#leaveActivity');
+
+            $.ajax({
+                url: '/leaveactivity',
+                data: $('#leaveForm').serialize(),
+                type: 'post',
+                dataType: 'json',
+                success: function(response){
+
+                    (response.success === true) ? leaveActivity.html('<h3>Ha salido de la actividad.</h3>') : '';
+                    function redirect(){
+                        window.location = '/';
+                    }
+                    setTimeout(redirect, 2000);
+                },
+                error: function(response) { // What to do if we fail
+                    var errors = response.responseJSON;
+                    var html = '';
+
+                    if (errors.success === false){
+                        $.each( errors.errors, function( key, value ) {
+                            html += '<span><p>' + value + '</p></span>';
+                        });
+                        leaveActivity.append(html);
+                    }
+                }
+            });
+
+        });
+    } // END Ajax
 };
 
 Activeko.form.init();

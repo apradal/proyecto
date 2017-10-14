@@ -19,14 +19,15 @@ class CreateActivitiesTable extends Migration
             $table->string('titulo');
             $table->mediumText('descripcion');
             $table->date('fecha_inicio');
-            $table->date('fecha_fin');
+            $table->date('fecha_fin')->nullable();
             $table->string('tipo');
             $table->string('estado');
             $table->string('provincia');
             $table->string('poblacion');
             $table->string('direccion');
             $table->string('hora_inicio');
-            $table->string('hora_fin');
+            $table->string('hora_fin')->nullable();
+            $table->integer('id_creator');
             $table->timestamps();
 
         });

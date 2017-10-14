@@ -68,7 +68,9 @@ class MainController extends Controller
 
         ];
 
-        return view('home')->with('provinces', $provinces);
+        $activities = Activity::all();
+
+        return view('home', ['provinces' => $provinces, 'activities' => $activities]);
 
     }
 
@@ -154,12 +156,17 @@ class MainController extends Controller
 
         //saca el usuario con nombre antonio
         //$user = $user->where('nombre', '=', 'antonio')->first();
-        //saca el usuario con id 1
+        //saca la actividad con id 1
         $activity = $activity->find(1);
         //saca los usuarios que tienen id 1 de actividad
         //$user = $activity->find(1)->users;
-        return $activity;
+        $x = array();
+        //SACA TODOS LOS USUARIOS REGISTRADOS A ESTA ACTIVIDAD
+        foreach ($activity->users as $user){
+            $x[] = $user->id;
+        }
 
+        return $x;
     }
 
 }
