@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
+@extends('layouts.app')
 
-    <meta charset="utf-8">
-    <title>Activeko</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
-
-</head>
-<body>
-
-@include('includes.loginPanel')
+@section('content')
 
 <div id="createActivityForm">
 
@@ -74,7 +64,4 @@
 
 </div>
 
-<script src="{{ asset('js/myJs.js') }}"></script>
-
-</body>
-</html>
+@endsection

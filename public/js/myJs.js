@@ -189,7 +189,9 @@ Activeko.form = {
             });
 
         });
-
+        /**
+         * Ajax that let you leave an Activity
+         */
         $(document).on('submit', '#leaveForm', function (event) {
 
             event.preventDefault();
@@ -222,6 +224,58 @@ Activeko.form = {
                 }
             });
 
+        });
+        /**
+         * Ajax which call the province when filter option is selected and prints them
+         */
+        $(document).on('change', '.filter', function () {
+
+            var choicesQuery = {
+                province : $('#provincesSearch').val(),
+                type : $('#typesSearch').val(),
+                date : $('#dateSearch').val()
+            };
+            $.ajax({
+                url: '/buildactivity',
+                data: choicesQuery,
+                type: 'get',
+                success: function(response){
+                    $('#activities').html(response);
+                },
+                error: function(response) { // What to do if we fail
+
+                }
+            });
+        });
+        /**
+         * Ajax that resets all the filters and prints the activities
+         */
+        $(document).on('click', '#resetSearch', function () {
+
+            var province = $('#provincesSearch'),
+                type = $('#typesSearch'),
+                date = $('#dateSearch');
+
+            province.val("");
+            type.val("");
+            date.val("");
+
+            var choicesQuery = {
+                province : province.val(),
+                type : type.val(),
+                date : date.val()
+            };
+            $.ajax({
+                url: '/buildactivity',
+                data: choicesQuery,
+                type: 'get',
+                success: function(response){
+                    $('#activities').html(response);
+                },
+                error: function(response) { // What to do if we fail
+
+                }
+            });
         });
     } // END Ajax
 };

@@ -13,6 +13,7 @@
 
 /** INDEX **/
 Route::get('/', 'MainController@getIndex');
+Route::get('/buildactivity', 'MainController@buildQueryActivity');
 
 /** USER STUFF **/
 Route::post('/registeruser', 'FormsController@submitRegisterUser');
