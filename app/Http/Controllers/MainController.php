@@ -105,17 +105,12 @@ class MainController extends Controller
      * returns the html rendered by filter options
      */
     public function buildQueryActivity(Request $request){
-
         $activities = $this->queryBuilder($request);
-
         $html = \View::make("includes.activities", compact('activities'))->render();
-
         return $html;
-
     }
 
     protected function queryBuilder($request){
-
         $province = $request->input('province');
         $type = $request->input('type');
         $date = $request->input('date');
@@ -148,7 +143,7 @@ class MainController extends Controller
         if ($province == null && $type != null && $date == null) return Activity::where('tipo', '=', $type)->get();
         //todas las posibilidades de fecha not null y los demas si.
         if ($province == null && $type == null && $date != null) return Activity::where('fecha_inicio', '=', $date)->get();
-        //si todo esta null es que se ha pulsado el boton reset
+        //si todos esta null es que se ha pulsado el boton reset
         if ($province == null && $type == null && $date == null) return Activity::all();
 
     }

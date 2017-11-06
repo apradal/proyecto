@@ -44,7 +44,8 @@ class ActivitiesController
                 'nullable',
                 'regex:/^(([0-1][0-9]|2[0-3]):[0-5][0-9])$/'
             ),
-            'description' => 'required'
+            'description' => 'required',
+            'participants' => 'required',
         ],
         [
             'title.required' => 'El título es obligatorio.',
@@ -59,6 +60,7 @@ class ActivitiesController
             'startHour.timezone' => 'La hora de inicio debe ser formato horas.',
             'endHour.timezone' => 'La hora fin debe ser formato horas.',
             'description.required' => 'La descripción es obligatoria.',
+            'participants.required' => 'Debe indicar el número máximo de participantes',
         ]);
 
         //if something is wrong
@@ -78,6 +80,8 @@ class ActivitiesController
             $activity->hora_inicio = $request->input('startHour');
             $activity->hora_fin = $request->input('endHour');
             $activity->id_creator = Auth::id();
+            $activity->num_participantes = 1;
+            $activity->max_participantes = $request->input('participants');
 
             //save activity and create the relationship
             if($activity->save()){
@@ -121,6 +125,8 @@ class ActivitiesController
     public function join(Request $request){
         $activityId = $request->input('activityId');
         $activity = Activity::where('id', $activityId)->first();
+        $activity->num_participantes += 1;
+        $activity->save();
         if($this->createRelation($activity, 'participante')){
             return response()->json(['success' => true], 200);
         } else {
@@ -138,7 +144,9 @@ class ActivitiesController
      */
     public function leave(Request $request){
         $activityId = $request->input('activityId');
-
+        $activity = Activity::where('id', $activityId)->first();
+        $activity->num_participantes -= 1;
+        $activity->save();
         if ( DB::table('activity_user')
             ->where(['user_id' => Auth::id(), 'activity_id' => $activityId])
             ->delete()){

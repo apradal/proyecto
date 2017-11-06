@@ -39,6 +39,9 @@
     {{Form::label('street', 'Dirección: ')}}
     {{Form::text('street', '', ['placeholder' => 'Paseo Independencia 32*'])}}<br/>
 
+    {{Form::label('participants', 'Número de participantes: ')}}
+    {{Form::number('participants')}}<br/>
+
     {{Form::label('startHour', 'Hora inicio: ')}}
     {{Form::time('startHour')}}<br/>
 
