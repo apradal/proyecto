@@ -22,7 +22,8 @@ class FormsController extends Controller
         $user = new User;
 
         //validates the data (includes check if email already exists in db)
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(),
+        [
             'email' => 'unique:users|required|email',
             'password' => 'required',
             'name' => 'required',

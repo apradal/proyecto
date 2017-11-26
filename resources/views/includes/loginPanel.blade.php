@@ -1,5 +1,5 @@
 <nav id="userPanel">
-
+    <a class="logo" href="{{ url('/')}}"><h3>Logo de vuelta</h3></a>
     <ul>
         @if (Auth::check())
             <li>
@@ -14,6 +14,9 @@
             </li>
             <li>
                 <a href="{{ url('/createactivityform') }}">Crear actividad</a>
+            </li>
+            <li>
+                <a href="{{url('/userpanel')}}">Mi cuenta</a>
             </li>
         @else
             <li>

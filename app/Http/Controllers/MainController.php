@@ -79,9 +79,7 @@ class MainController extends Controller
      * call the main web passing the activities to be shown
      */
     public function getIndex(){
-
         $activities = $this->firstActivityBuild();
-
         return view('home', ['provinces' => $this->provinces, 'activities' => $activities, 'types' => $this->types]);
 
     }

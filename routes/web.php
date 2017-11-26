@@ -19,6 +19,8 @@ Route::get('/buildactivity', 'MainController@buildQueryActivity');
 Route::post('/registeruser', 'FormsController@submitRegisterUser');
 Route::post('/loginuser', 'FormsController@submitLoginUser');
 Route::post('/logoutuser', 'FormsController@submitLogoutUser');
+Route::get('/userpanel', 'UserController@getIndex');
+Route::post('/personaldata', 'UserController@changeUserData');
 
 /** ACTIVITY STUFF **/
 //es llamado por un hiperlink, tiene que ser get. {{ url('/createactivity') }}.
