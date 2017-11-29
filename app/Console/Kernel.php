@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Activity;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,7 +14,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
     ];
 
     /**
@@ -26,6 +26,16 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->call(function (){
+            $activities = Activity::all();
+            foreach ($activities as $activity) {
+                $date = date($activity->fecha_fin.' '.$activity->hora_fin);
+                if ($date < date("Y-m-d H:i")) {
+                    $activity->estado = 'finalizada';
+                    $activity->save();
+                }
+            }
+        })->everyMinute();
     }
 
     /**

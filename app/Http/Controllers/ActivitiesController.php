@@ -31,7 +31,7 @@ class ActivitiesController
         $validator = Validator::make($request->all(),[
             'title' => 'required',
             'startDate' => 'required|date',
-            'endDate' => 'nullable|date',
+            'endDate' => 'required|date',
             'types' => 'required',
             'provinces' => 'required',
             'poblation' => 'required',
@@ -41,7 +41,7 @@ class ActivitiesController
                 'regex:/^(([0-1][0-9]|2[0-3]):[0-5][0-9])$/'
             ),
             'endHour' => array(
-                'nullable',
+                'required',
                 'regex:/^(([0-1][0-9]|2[0-3]):[0-5][0-9])$/'
             ),
             'description' => 'required',
@@ -51,6 +51,7 @@ class ActivitiesController
             'title.required' => 'El título es obligatorio.',
             'startDate.required' => 'La fecha de inicio es obligatoria.',
             'startDate.date' => 'La fehca de inicio debe ser formato fecha',
+            'endDate.required' => 'La fecha din es obligatoria',
             'endDate.date' => 'La fehca fin debe ser formato fecha.',
             'types.required' => 'El tipo de actividad es obligatorio.',
             'provinces.required' => 'La provincia es obligatoria.',
@@ -58,6 +59,7 @@ class ActivitiesController
             'street.required' => 'La dirección es obligatoria.',
             'startHour.required' => 'La hora de incio es obligatoria.',
             'startHour.timezone' => 'La hora de inicio debe ser formato horas.',
+            'endHour.required' => 'La hora fin es obligatoria',
             'endHour.timezone' => 'La hora fin debe ser formato horas.',
             'description.required' => 'La descripción es obligatoria.',
             'participants.required' => 'Debe indicar el número máximo de participantes',

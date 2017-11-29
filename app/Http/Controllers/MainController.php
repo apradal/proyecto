@@ -158,22 +158,14 @@ class MainController extends Controller
 
     public function pruebas(){
 
-        $user = new User();
-        $activity = new Activity();
-
-        //saca el usuario con nombre antonio
-        //$user = $user->where('nombre', '=', 'antonio')->first();
-        //saca la actividad con id 1
-        $activity = $activity->find(1);
-        //saca los usuarios que tienen id 1 de actividad
-        //$user = $activity->find(1)->users;
-        $x = array();
-        //SACA TODOS LOS USUARIOS REGISTRADOS A ESTA ACTIVIDAD
-        foreach ($activity->users as $user){
-            $x[] = $user->id;
+        $activities = Activity::all();
+        foreach ($activities as $activity) {
+            $date = date($activity->fecha_fin.' '.$activity->hora_fin);
+            if ($date < date("Y-m-d H:i")) {
+                $activity->estado = 'finalizada';
+                $activity->save();
+            }
         }
-
-        return $x;
     }
 
 }

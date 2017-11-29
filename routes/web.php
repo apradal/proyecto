@@ -32,4 +32,9 @@ Route::post('/leaveactivity', 'ActivitiesController@leave');
 /** TEST STUFF */
 Route::get('/prueba', 'MainController@pruebas');
 
-
+/* TODO: Aquí apunto todo lo que tengo pendiente de hacer
+    sección admin, eliminar actividades, editar actividades, eliminar users.
+    añadir campo mensaje cierre a la actividad. (hecho) para indicar cierre por finalización o por el admin etc. (falta hacer el migrate y la funcionalidad)
+    tb mostrar el mensaje en las finalizadas en userpanel.
+    redirect / una vez registrado
+*/

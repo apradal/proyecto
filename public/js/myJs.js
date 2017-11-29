@@ -48,7 +48,7 @@ Activeko.form = {
             joinActivity.css({ 'display': "none" });
         });
         /**
-         * show the popu leaveActivity
+         * show the popup leaveActivity
          * and put the name and the id of an Activity
          */
         $(document).on('click', '.leaveButton', function (event) {

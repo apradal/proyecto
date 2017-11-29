@@ -1,7 +1,21 @@
 <nav id="userPanel">
     <a class="logo" href="{{ url('/')}}"><h3>Logo de vuelta</h3></a>
     <ul>
-        @if (Auth::check())
+        @if(Auth::check() && Auth::user()->nombre == 'Admin' && Auth::id() === 3)
+        <li>
+        <span>logueado {{Auth::user()->nombre}}</span>
+        </li>
+        <li>
+        {!! Form::open(['url' => '/logoutuser', 'id' => 'logoutUserForm']) !!}
+
+        {{Form::submit('Log Out')}}
+
+        {!! Form::close() !!}
+        </li>
+        <li>
+        <a href="">Administrar</a>
+        </li>
+        @elseif (Auth::check())
             <li>
                 <span>logueado {{Auth::user()->nombre}}</span>
             </li>
@@ -27,5 +41,4 @@
             </li>
         @endif
     </ul>
-
 </nav>

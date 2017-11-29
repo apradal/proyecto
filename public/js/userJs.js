@@ -7,7 +7,41 @@ Activeko.user = {
     },
     userData: $('#userInfo').serializeArray(),
     listeners: function () {
-
+        $(document).on('click', '.leaveButton', function (event) {
+            var leaveActivity = $('#leaveActivity'),
+                activityId = $('#leaveActivityId');
+            $getActivityTitle = $('#'+ event.target.id).prev().children('h2').html();
+            $('#joinActivityTitle').html('Está apunto de salirse de la actividad: ' + $getActivityTitle);
+            activityId.val(event.target.id);
+            leaveActivity.css({ 'display' : 'block'});
+        });
+        /**
+         * Hides the popup leaveActivity
+         * Simulates cancel.
+         */
+        $(document).on('click', '#cancelLeaveActivity', function (event) {
+            var leaveActivity = $('#leaveActivity');
+            leaveActivity.css({ 'display': "none" });
+        });
+        /**
+         * Shows and hides the content of personal data user or activities.
+         */
+        $(document).on('click', '.userpaneloptions', function (event) {
+            var dataOption = $('#personaldata'),
+                activityOption = $('#activities-user');
+            switch (event.target.id) {
+                case 'dataOption':
+                    dataOption.css({ 'display': "block" });
+                    activityOption.css({ 'display': "none" });
+                    break;
+                case 'activitiesOption':
+                    dataOption.css({ 'display': "none" });
+                    activityOption.css({ 'display': "block" });
+                    break;
+                default:
+                    break;
+            }
+        });
     },
     ajaxs : function () {
         /**
@@ -44,6 +78,38 @@ Activeko.user = {
             } else {
                 error.html('No ha cambiado ningún campo.');
             }
+        });
+        /**
+         * Ajax that let you leave an Activity
+         */
+        $(document).on('submit', '#leaveForm', function (event) {
+            event.preventDefault();
+            var leaveActivity =  $('#leaveActivity');
+            $.ajax({
+                url: '/leaveactivity',
+                data: $('#leaveForm').serialize(),
+                type: 'post',
+                dataType: 'json',
+                success: function(response){
+
+                    (response.success === true) ? leaveActivity.html('<h3>Ha salido de la actividad.</h3>') : '';
+                    function redirect(){
+                        window.location = '/userpanel';
+                    }
+                    setTimeout(redirect, 2000);
+                },
+                error: function(response) { // What to do if we fail
+                    var errors = response.responseJSON;
+                    var html = '';
+
+                    if (errors.success === false){
+                        $.each( errors.errors, function( key, value ) {
+                            html += '<span><p>' + value + '</p></span>';
+                        });
+                        leaveActivity.append(html);
+                    }
+                }
+            });
         });
     },
     changedData: function () {

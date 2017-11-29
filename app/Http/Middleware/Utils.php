@@ -7,6 +7,7 @@
  */
 
 namespace App\Http\Middleware;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Foundation\Http\Middleware\TrimStrings as Middleware;
 
@@ -26,6 +27,18 @@ class Utils extends Middleware
         $newEnd = date('d-m-Y',$endTime);
 
         return array($newStart, $newEnd);
+    }
+
+    public static function addUserRole($user, $activites)
+    {
+        foreach ($activites as $activity) {
+            $user_role = DB::table('activity_user')
+                ->select('user_role')
+                ->where('activity_id', '=', $activity->id)
+                ->where('user_id', '=', $user->id)
+                ->value('user_role');
+            $activity->user_role = $user_role;
+        }
     }
 
 }

@@ -9,7 +9,6 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -78,14 +77,7 @@ class UserController extends Controller
         if (Auth::user()){
             $user = User::find(Auth::id());
             $activites = $user->activities()->orderBy('fecha_inicio', 'DESC')->limit('6')->get();
-            foreach ($activites as $activity) {
-                $user_role = DB::table('activity_user')
-                    ->select('user_role')
-                    ->where('activity_id', '=', $activity->id)
-                    ->where('user_id', '=', $user->id)
-                    ->value('user_role');
-                $activity->user_role = $user_role;
-            }
+            \App\Http\Middleware\Utils::addUserRole($user,$activites);
             return view('userpanel',['provinces' => $this->provinces, 'user' => $user, 'activities' => $activites]);
         }
         return view('userpanel',['provinces' => $this->provinces]);
