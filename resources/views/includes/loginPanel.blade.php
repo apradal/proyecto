@@ -13,7 +13,7 @@
         {!! Form::close() !!}
         </li>
         <li>
-        <a href="">Administrar</a>
+        <a href="{{ url('/admin') }}">Administrar</a>
         </li>
         @elseif (Auth::check())
             <li>

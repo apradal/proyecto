@@ -92,26 +92,22 @@ class FormsController extends Controller
                 'errors' => $validator->errors()->toArray(),
                 'success' => false
             ], 422);
-
         } else {
-
             if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
                 // Authentication passed...
                 //creates the user autenticated
                 $user = Auth::user();
                 //make him login so i can access the data on views.
                 Auth::login($user);
-
-                return response()->json(['success' => true], 200);
-
+                if ($user->email === 'admin@proyecto.com') {
+                    return response()->json(['success' => true, 'admin' => true], 200);
+                } else {
+                    return response()->json(['success' => true, 'admin' => false], 200);
+                }
             } else {
-
                 return $this->checkUserExists($request);
-
             }
-
-        };
-
+        }
     }
 
     /**

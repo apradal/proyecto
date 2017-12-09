@@ -67,18 +67,22 @@ Activeko.form = {
             var leaveActivity = $('#leaveActivity');
             leaveActivity.css({ 'display': "none" });
         });
+        $(document).on('click', '#delete-activity-button', function (event) {
+            event.preventDefault();
+            $('#delete-activity').css({'display':'block'});
+        });
+        $('#cancel-delete-activity-b').on('click', function () {
+            $('#delete-activity').css({'display':'none'});
+        });
     }, // END Listeners
     ajaxs : function () {
         /**
          * Ajax which let you register an user
          */
         $(document).on('submit', '#registerUserForm', function (event) {
-
             event.preventDefault();
-
             var error = $('.errors'),
                 succes = $('.success');
-
             $.ajax({
                 url: '/registeruser',
                 data: $('#registerUserForm').serialize(),
@@ -112,56 +116,45 @@ Activeko.form = {
          * Ajax which let you login.
          */
         $(document).on('submit', '#loginUserForm', function (event) {
-
             event.preventDefault();
-
             var error = $('.errors'),
                 succes = $('.success');
-
             $.ajax({
                 url: '/loginuser',
                 data: $('#loginUserForm').serialize(),
                 type: 'post',
                 dataType: 'json',
                 success: function(response){
-
                     error.empty();
                     succes.empty();
-
-                    //if exists
-
                     if (response.success === true){
-                        window.location = '/';
+                        if (response.admin === true) {
+                            window.location = '/admin';
+                        } else {
+                            window.location = '/';
+                        }
                     }
-
                 },
                 error: function(response) { // What to do if we fail
                     var errors = response.responseJSON;
                     var html = '';
-
                     error.empty();
                     succes.empty();
-
                     if (errors.success === false){
                         $.each( errors, function( key, value ) {
                             (key == 'errors') ? html += '<span><p>' + value + '</p></span>' : '';
                         });
                         error.append(html);
                     }
-
                 }
             });
-
         });
         /**
          * Ajax that let you Join an Activity
          */
         $(document).on('submit', '#joinForm', function (event) {
-
             event.preventDefault();
-
             var joinAtivity =  $('#joinActivity');
-
             $.ajax({
                 url: '/joinactivity',
                 data: $('#joinForm').serialize(),
@@ -187,7 +180,6 @@ Activeko.form = {
                     }
                 }
             });
-
         });
         /**
          * Ajax that let you leave an Activity
@@ -251,15 +243,12 @@ Activeko.form = {
          * Ajax that resets all the filters and prints the activities
          */
         $(document).on('click', '#resetSearch', function () {
-
             var province = $('#provincesSearch'),
                 type = $('#typesSearch'),
                 date = $('#dateSearch');
-
             province.val("");
             type.val("");
             date.val("");
-
             var choicesQuery = {
                 province : province.val(),
                 type : type.val(),
@@ -273,7 +262,40 @@ Activeko.form = {
                     $('#activities').html(response);
                 },
                 error: function(response) { // What to do if we fail
-
+                }
+            });
+        });
+        /**
+         * Ajax which deletes activity.
+         */
+        $('#delete-activity-b').on('click', function () {
+            var error = $('.errors'),
+                succes = $('.success');
+            $.ajax({
+                url: '/deleteactivity',
+                data: $('#edit-form').serialize(),
+                type: 'get',
+                dataType: 'json',
+                success: function(response){
+                    error.empty();
+                    succes.empty();
+                    if (response.success === true){
+                        if (response.admin === true) {
+                            succes.append('<span><p>Actividad eliminada.</p></span>');
+                            setTimeout(window.location = '/admin', 4000);
+                        } else {
+                            setTimeout(window.location = '/', 4000);
+                        }
+                    }
+                },
+                error: function(response) { // What to do if we fail
+                    var errors = response.responseJSON;
+                    error.html("");
+                    var html = '';
+                    $.each( errors.errors, function( key, value ) {
+                        html += '<span><p>' + value + '</p></span>';
+                    });
+                    error.append(html);
                 }
             });
         });

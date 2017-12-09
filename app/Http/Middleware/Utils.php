@@ -41,4 +41,34 @@ class Utils extends Middleware
         }
     }
 
+    /**
+     * @param $end
+     * @param $start
+     * @return bool
+     * Calculate if end time is gt than start
+     */
+    public static function gtTime($end, $start)
+    {
+        $end = explode(':', $end);
+        $start = explode(':', $start);
+        if ($end[0] < $start[0]) return false;
+        if ($end[0] == $start[0]) {
+            if ($end[1] <= $start[1]) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    }
+    public static function gtDate($end, $start)
+    {
+        $end = explode('-', $end);
+        $start = explode('-', $start);
+        if ($end[0] < $start[0]) return false;
+        if ($end[1] < $start[1]) return false;
+        if ($end[2] < $start[2]) return false;
+        return true;
+    }
 }

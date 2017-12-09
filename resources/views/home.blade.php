@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@include('includes.registerForm')
+
 @section('content')
 
     <h1>Contenido principal de la página</h1>

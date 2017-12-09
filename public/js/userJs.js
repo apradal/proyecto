@@ -42,6 +42,11 @@ Activeko.user = {
                     break;
             }
         });
+        $('.activity').each(function () {
+            $(this).on('click', function () {
+                $(this).children().submit();
+            });
+        });
     },
     ajaxs : function () {
         /**

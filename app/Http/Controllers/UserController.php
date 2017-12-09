@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Activity;
 
 class UserController extends Controller
 {
@@ -70,6 +71,18 @@ class UserController extends Controller
         'Valladolid',
         'Zamora',
         'Zaragoza'
+    ];
+    protected $states = [
+        'activa',
+        'finalizada'
+    ];
+    protected $types = [
+        'Deportes',
+        'Didáctica',
+        'Hostelería',
+        'Ocio',
+        'Viajes',
+        'Otros'
     ];
 
     public function getIndex()
@@ -156,5 +169,30 @@ class UserController extends Controller
         //save user
         $user->save();
 
+    }
+
+    public function getActivityIndex(Request $request)
+    {
+        $activity = $this->getActivity($request->id);
+        $creator = null;
+        $users = $activity->users;
+        foreach ($users as $key => $value) {
+            if ($value->id == $activity->id_creator){
+                $creator = $value;
+                $users->forget($key);
+            }
+        }
+        return view('activities', [
+            'activity' => $activity,
+            'types' => $this->types,
+            'provinces' => $this->provinces,
+            'states' => $this->states,
+            'users' => $activity->users,
+            'creator' => $creator]);
+    }
+
+    protected function getActivity($id)
+    {
+        return Activity::find($id);
     }
 }

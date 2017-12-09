@@ -8,7 +8,19 @@ class Activity extends Model
 {
 
     protected $fillable = [
-        'titulo', 'descripcion', 'fecha_creacion',
+        'titulo',
+        'descripcion',
+        'fecha_creacion',
+        'fecha_inicio',
+        'fecha_fin',
+        'tipo',
+        'estado',
+        'provincia',
+        'poblacion',
+        'direccion',
+        'hora_inicio',
+        'hora_fin',
+        'max_participantes'
     ];
 
     /**

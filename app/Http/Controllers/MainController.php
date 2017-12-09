@@ -81,7 +81,6 @@ class MainController extends Controller
     public function getIndex(){
         $activities = $this->firstActivityBuild();
         return view('home', ['provinces' => $this->provinces, 'activities' => $activities, 'types' => $this->types]);
-
     }
 
     /**
@@ -108,6 +107,11 @@ class MainController extends Controller
         return $html;
     }
 
+    /**
+     * @param $request
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[]
+     * return the activities to be rendered.
+     */
     protected function queryBuilder($request){
         $province = $request->input('province');
         $type = $request->input('type');

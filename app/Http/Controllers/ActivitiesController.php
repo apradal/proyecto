@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Http\Middleware\Utils;
 use App\Activity;
 
 
@@ -161,4 +162,119 @@ class ActivitiesController
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * Deletes the activity and all the data relation with.
+     */
+    public function delete(Request $request)
+    {
+        $id = $request->input('id');
+        $validator = Validator::make($request->all(),[
+            'comment-admin' => 'required',
+        ],
+        [
+            'comment-admin.required' => 'Debe indicar el motivo.',
+        ]);
+        if ($validator->fails()) {
+            $error = array();
+            $errors = $validator->errors()->messages();
+            foreach ($errors as $err => $value) {
+                foreach ($value as $val) {
+                    $error[] = $val;
+                }
+            }
+            return response()->json([
+                'errors' => $error,
+                'success' => false
+            ], 422);
+        }
+        $activity = Activity::find($id);
+        if ($activity->delete()){
+            if (Auth::user()->email === 'admin@proyecto.com') {
+                return response()->json(['success' => true, 'admin' => true], 200);
+            } else {
+                return response()->json(['success' => true, 'admin' => false], 200);
+            }
+        } else {
+            return response()->json([
+                'errors' => 'Error al eliminar esta actidivad.',
+                'success' => false
+            ], 422);
+        }
+    }
+
+    public function edit(Request $request)
+    {
+        $inputs = $request->all();
+        $rules = [
+            'titulo' => 'required',
+            'poblacion' => 'required',
+            'direccion' => 'required',
+            'max_participantes' => 'required',
+            'fecha_inicio' => 'required',
+            'fecha_fin' => 'required|gtdate',
+            'hora_inicio' => array(
+                'required',
+                'regex:/^(([0-1][0-9]|2[0-3]):[0-5][0-9])$/'
+            ),
+            'hora_fin' => array(
+                'required',
+                'gt',
+                'regex:/^(([0-1][0-9]|2[0-3]):[0-5][0-9])$/'
+            ),
+            'descripcion' => 'required',
+            'comment-admin' => 'required',
+        ];
+        $messages = [
+            'titulo.required' => 'El título es obligatorio.',
+            'poblacion.required' => 'La población es obligatoria.',
+            'direccion.required' => 'La dirección es obligatoria',
+            'max_participantes.required' => 'El máximo de usuarios es obligatorio.',
+            'fecha_inicio.required' => 'La fecha inicio es obligatoria.',
+            'fecha_fin.required' => 'La fecha fin es obligatoria.',
+            'hora_inicio.required' => 'La hora de incio es obligatoria.',
+            'hora_inicio.timezone' => 'La hora de inicio debe ser formato horas.',
+            'hora_fin.required' => 'La hora fin es obligatoria',
+            'hora_fin.timezone' => 'La hora fin debe ser formato horas.',
+            'descripcion.required' => 'La descripción es obligatoria.',
+            'comment-admin.required' => 'Debe indicar un comentario',
+            'hora_fin.gt' => 'La hora fin debe ser mayor que la hora inicial',
+            'fecha_fin.gtdate' => 'La fecha fin no puede ser menor que la inicial',
+        ];
+        /* EXTENSION TO CALCULATE GTS AND LTS */
+        Validator::extend('gt', function(){
+            $end = $_REQUEST['hora_fin'];
+            $start = $_REQUEST['hora_inicio'];
+            return Utils::gtTime($end, $start);
+        });
+        Validator::extend('gtdate', function(){
+            $end = $_REQUEST['fecha_fin'];
+            $start = $_REQUEST['fecha_inicio'];
+            return Utils::gtDate($end, $start);
+        });
+        $validator = Validator::make($inputs,$rules,$messages);
+        if ($validator->fails()){
+            return redirect('/activityadmin?id='.$request->id)->withErrors($validator)->withInput();
+        } else {
+            if($this->update($request)) {
+                if (Auth::user()->email === 'admin@proyecto.com') {
+                    return redirect('/admin')->with('message', 'Actividad editada!');
+                } else {
+                    return redirect('/userpanel')->with('message', 'Actividad editada!');
+                }
+            }
+        }
+    }
+
+    public function update($request)
+    {
+        $id = $request->id;
+        $parameters = $request->all();
+        unset($parameters['comment-admin']);
+        unset($parameters['edit']);
+        $activity = Activity::find($id);
+        $activity->update($parameters);
+        return $activity->save();
+    }
 }

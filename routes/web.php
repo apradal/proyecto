@@ -21,6 +21,7 @@ Route::post('/loginuser', 'FormsController@submitLoginUser');
 Route::post('/logoutuser', 'FormsController@submitLogoutUser');
 Route::get('/userpanel', 'UserController@getIndex');
 Route::post('/personaldata', 'UserController@changeUserData');
+Route::get('/activityuser', 'UserController@getActivityIndex');
 
 /** ACTIVITY STUFF **/
 //es llamado por un hiperlink, tiene que ser get. {{ url('/createactivity') }}.
@@ -28,6 +29,13 @@ Route::get('/createactivityform', 'MainController@createActivity');
 Route::get('/createactivty', 'ActivitiesController@create');
 Route::post('/joinactivity', 'ActivitiesController@join');
 Route::post('/leaveactivity', 'ActivitiesController@leave');
+Route::get('/deleteactivity', 'ActivitiesController@delete');
+Route::get('/editactivity', 'ActivitiesController@edit');
+
+/** ADMIN **/
+Route::get('/admin', 'AdminController@getIndex');
+Route::get('/admingetactivities', 'AdminController@getActivities');
+Route::get('/activityadmin', 'AdminController@getActivityIndex');
 
 /** TEST STUFF */
 Route::get('/prueba', 'MainController@pruebas');

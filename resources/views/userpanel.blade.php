@@ -20,6 +20,11 @@
             </div>
             <div id="content">
                 <h1>Contenido de usuario</h1>
+                @if(session('message'))
+                    {{--aqui quiero poner una x de icono y con css aparecera en medio y se podra cerrar--}}
+                    {{--saca el mensaje activdad creada--}}
+                    <div id="message">{{session('message')}}</div>
+                @endif
                 @include('includes.personalData')
                 @include('includes.activitiesUser')
                 @include('includes.leaveActivity')
