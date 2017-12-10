@@ -84,6 +84,7 @@ class UserController extends Controller
         'Viajes',
         'Otros'
     ];
+    protected $data;
 
     public function getIndex()
     {
@@ -194,5 +195,51 @@ class UserController extends Controller
     protected function getActivity($id)
     {
         return Activity::find($id);
+    }
+
+    public function getUsers(Request $request)
+    {
+        $users = $this->queryBuilder($request);
+        if (isset($users)) {
+            $html = \View::make("includes.usersAdmin", compact('users'))->render();
+        } else {
+            $html = '<span>No existen actividades con estos filtros.</span>';
+        }
+        return $html;
+    }
+
+    protected function queryBuilder($request){
+        $this->data = $request->all();
+        unset($this->data['search']);
+        foreach ($this->data as $key => $value) {
+            if ($value === null) unset($this->data[$key]);
+        }
+        if (count($this->data) > 0) {
+            $data = $this->buildParamsQuery();
+            return User::where($data)->get();
+        }
+        return null;
+    }
+
+    protected function buildParamsQuery()
+    {
+        $data = array();
+        foreach ($this->data as $key => $value) {
+            $data[] = [$key, '=', $value];
+        }
+        return $data;
+    }
+
+    public function delete(Request $request)
+    {
+        $id = $request->input('id');
+        if ($id != null) {
+            $user = User::find($id);
+            if ($user->delete()) {
+                return redirect('/admin')->with('message', 'Usuario eliminado!');
+            } else {
+                return redirect('/admin')->withErrors('No se ha eliminado el usuario.')->withInput();
+            }
+        }
     }
 }

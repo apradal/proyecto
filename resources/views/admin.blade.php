@@ -12,6 +12,12 @@
     {!! Form::open(['url' => '/logoutuser', 'id' => 'logoutUserForm']) !!}
     {{Form::submit('Log Out')}}
     {!! Form::close() !!}
+    <div id="izq">
+        <ul class="adminpanel-options">
+            <li id="activities-option">Actividades</li>
+            <li id="users-option">Usuarios</li>
+        </ul>
+    </div>
     <div id="content">
         <h1>Contenido de admin</h1>
         @if(session('message'))
@@ -21,7 +27,7 @@
         @endif
         <p>Desde este menú puede buscar, editar y eliminar actividades o usuarios.</p>
         @include('includes.filterBarAdmin')
-        <ul id="activities">Seleccione filtros de busqueda para mostrarle los resultados</ul>
+        @include('includes.filterBarUser')
     </div>
 @else
     <h1>Ops! no deberías de estar aquí!!!</h1>

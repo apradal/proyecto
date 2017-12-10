@@ -22,6 +22,8 @@ Route::post('/logoutuser', 'FormsController@submitLogoutUser');
 Route::get('/userpanel', 'UserController@getIndex');
 Route::post('/personaldata', 'UserController@changeUserData');
 Route::get('/activityuser', 'UserController@getActivityIndex');
+Route::get('/searchusers', 'UserController@getUsers');
+Route::get('/deleteuser', 'UserController@delete');
 
 /** ACTIVITY STUFF **/
 //es llamado por un hiperlink, tiene que ser get. {{ url('/createactivity') }}.

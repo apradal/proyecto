@@ -109,7 +109,7 @@ class AdminController extends Controller
         $this->data = $request->all();
         unset($this->data['search']);
         if (isset($this->data['id_creator'])) {
-            $this->converMailUserToId();
+            $this->convertMailUserToId();
         }
         foreach ($this->data as $key => $value) {
             if ($value === null) unset($this->data[$key]);
@@ -121,7 +121,7 @@ class AdminController extends Controller
         return null;
     }
 
-    protected function converMailUserToId()
+    protected function convertMailUserToId()
     {
         $user = User::where([['email', '=', $this->data['id_creator']]])->first();
         if ($user != null) {

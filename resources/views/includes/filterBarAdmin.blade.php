@@ -23,7 +23,8 @@
         <label for="fecha_fin">Fecha incio</label>
         <input type="date" id="fecha_fin" class="filter" name="fecha_fin"/>
         <label for="resetSearch">Reiniciar búsqueda</label>
-        <input type="button" id="resetSearch" value="Reiniciar"/>
+        <input type="button" class="resetSearch" value="Reiniciar"/>
         <input type="submit" name="search" id="searchButton" value="Buscar"/>
     {!! Form::close() !!}
 </div>
+<ul id="activities">Seleccione filtros de busqueda para mostrarle los resultados</ul>

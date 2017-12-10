@@ -54,7 +54,9 @@
     <textarea name="descripcion" id="descripcion" cols="30" rows="5">{{$activity->descripcion}}</textarea>
     <label for="comment-admin">Comentario de edición o cierre</label>
     <textarea name="comment-admin" id="comment-admin" cols="30" rows="5"></textarea>
-    <input type="submit" name="edit" value="Editar"/>
-    <input type="submit" id="delete-activity-button" name="delete" value="Eliminar"/>
+    @if (Auth::user()->id === $activity->id_creator || Auth::user()->email === 'admin@proyecto.com')
+        <input type="submit" name="edit" value="Editar"/>
+        <input type="submit" id="delete-activity-button" name="delete" value="Eliminar"/>
+    @endif
     {!! Form::close() !!}
 </fieldset>
