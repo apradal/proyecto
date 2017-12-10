@@ -44,3 +44,109 @@ time, mark, audio, video {
 #users{
     display: none;
 }
+.btn-form{
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: .25rem;
+}
+.a-btn{
+    padding: 10px;
+    border-radius: .25rem;
+}
+.a-btn:hover{
+    cursor:pointer;
+}
+.filled{
+    color: #fff;
+    background-color: #1f648b;
+    -webkit-transition: background-color 1s ease-out;
+    -moz-transition: background-color 1s ease-out;
+    -o-transition: background-color 1s ease-out;
+    transition: background-color 1s ease-out;
+}
+.filled:hover{
+    background-color: #d58512;
+}
+/** HEADER **/
+#header{
+    background: #434444;
+}
+.header-a{
+    color: #fff;
+    padding: 9px;
+    border: 2px solid gray;
+    border-radius: .25rem;
+    text-decoration: none !important;
+    -webkit-transition: color 1s ease-out, border 1s ease-out;
+    -moz-transition: color 1s ease-out, border 1s ease-out;
+    -o-transition: color 1s ease-out, border 1s ease-out;
+    transition: color 1s ease-out, border 1s ease-out;
+}
+.header-a:hover{
+    color: #d58512 !important;
+    border: 2px solid #d58512;
+}
+/** LOGIN PANEL **/
+#userPanel{
+    width: 80%;
+    padding: 30px;
+    text-align: center;
+    margin: 0 auto;
+    color: #fff;
+}
+.logo{
+    float: left;
+    width: 10%;
+}
+.logo img{
+    width: 100%;
+}
+#user-options{
+    float: right;
+    margin-top: 10px;
+}
+#user-options *{
+    display: inline-block;
+    margin-left: 10px;
+}
+.clear{
+    clear: both;
+}
+.title{
+    font-size: 200%;
+    font-weight: bold;
+}
+/** FILTER MAIN **/
+#filterBar{
+    margin: 0 auto;
+    padding: 20px;
+    width: 50%;
+    color: #fff;
+}
+#filterBar *{
+    margin-left: 10px;
+}
+.filter-main{
+    background-color: #78A4A1;
+}
+#filterBar input[type=date], select{
+    border-radius: .25rem;
+    padding: 5px;
+    background-color: #fff;
+    border: none;
+}
+.filter-btn{
+    background-color: #D9853B;
+    color: #fff;
+    font-weight: 200;
+    border: 2px solid #558C89;
+    -webkit-transition: background-color 1s ease-out;
+    -moz-transition: background-color 1s ease-out;
+    -o-transition: background-color 1s ease-out;
+    transition: background-color 1s ease-out, border 1s ease-out;
+}
+.filter-btn:hover {
+    background-color: #558C89;
+    border: 2px solid #fff;
+}

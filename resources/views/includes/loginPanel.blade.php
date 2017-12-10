@@ -1,44 +1,24 @@
 <nav id="userPanel">
-    <a class="logo" href="{{ url('/')}}"><h3>Logo de vuelta</h3></a>
-    <ul>
+    <a class="logo" href="{{ url('/')}}"><img src="{{ URL::to('/images/logo-mini.png') }}" alt="logo"></a>
+    <span class="title">Activeko</span>
+    <div id="user-options">
         @if(Auth::check() && Auth::user()->nombre == 'Admin' && Auth::id() === 3)
-        <li>
-        <span>logueado {{Auth::user()->nombre}}</span>
-        </li>
-        <li>
+        <span>Usuario: {{Auth::user()->nombre}}</span>
+        <a href="{{ url('/admin') }}" class="header-a">Administrar</a>
         {!! Form::open(['url' => '/logoutuser', 'id' => 'logoutUserForm']) !!}
-
-        {{Form::submit('Log Out')}}
-
+            <input type="submit" class="btn-form filled" name="logout" value="Log Out">
         {!! Form::close() !!}
-        </li>
-        <li>
-        <a href="{{ url('/admin') }}">Administrar</a>
-        </li>
         @elseif (Auth::check())
-            <li>
-                <span>logueado {{Auth::user()->nombre}}</span>
-            </li>
-            <li>
-                {!! Form::open(['url' => '/logoutuser', 'id' => 'logoutUserForm']) !!}
-
-                {{Form::submit('Log Out')}}
-
-                {!! Form::close() !!}
-            </li>
-            <li>
-                <a href="{{ url('/createactivityform') }}">Crear actividad</a>
-            </li>
-            <li>
-                <a href="{{url('/userpanel')}}">Mi cuenta</a>
-            </li>
+            <span>Usuario: {{Auth::user()->nombre}}</span>
+            <a href="{{ url('/createactivityform') }}" class="header-a">Crear actividad</a>
+            <a href="{{url('/userpanel')}}" class="header-a">Mi cuenta</a>
+            {!! Form::open(['url' => '/logoutuser', 'id' => 'logoutUserForm']) !!}
+            <input type="submit" class="btn-form filled" name="logout" value="Log Out">
+            {!! Form::close() !!}
         @else
-            <li>
-                <button id="loginButton" class="btn-form">Login</button>
-            </li>
-            <li>
-                <button id="registerButton" class="btn-form">Registrarse</button>
-            </li>
+            <a id="loginButton" class="a-btn header-a">Login</a>
+            <a id="registerButton" class="a-btn filled">Registrarse</a>
         @endif
-    </ul>
+    </div>
+    <div class="clear"></div>
 </nav>

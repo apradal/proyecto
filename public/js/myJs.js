@@ -10,7 +10,7 @@ Activeko.form = {
         /**
          * Shows and Hide the forms to register and log
          */
-        $(document).on('click', '.btn-form', function (event) {
+        $(document).on('click', '.a-btn', function (event) {
             var loginForm = $('#loginForm'),
                 registerForm = $('#registerForm');
             
