@@ -122,14 +122,14 @@ class FormsController extends Controller
 
         if ($userExist === null) {
             // user doesn't exist
-            return response()->json(['errors' => 'Este correo no está registrado.','success' => false], 422);
+            return response()->json(['errors' => ['register' => 'Este correo no está registrado.'],'success' => false], 422);
         } else {
             //check password coincidence
             if (Hash::check( $request->input('password'), $userExist->password)){
                 //send success to ajax
                 return response()->json(['success' => true], 200);
             } else {
-                return response()->json(['errors' => 'La contraseña no coincide.','success' => false], 422);
+                return response()->json(['errors' => ['coincidence' => 'La contraseña no coincide.'],'success' => false], 422);
             }
 
         }

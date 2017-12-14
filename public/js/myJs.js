@@ -16,16 +16,49 @@ Activeko.form = {
             
             switch (event.target.id) {
                 case 'loginButton':
-                    loginForm.css({ 'display': "block" });
+                    loginForm.fadeIn(2000);
+                    $('#modal-bg').fadeIn(1500);
                     registerForm.css({ 'display': "none" });
                     break;
                 case 'registerButton':
                     loginForm.css({ 'display': "none" });
-                    registerForm.css({ 'display': "block" });
+                    registerForm.fadeIn(2000);
+                    $('#modal-bg').fadeIn(1500);
                     break;
                 default:
                     break;
             }
+        });
+        $(document).on('click', '.icon.cancel', function () {
+            var id = ($(this).parent()[0].id);
+            var loginForm = $('#loginForm');
+            var registerForm = $('#registerForm');
+            var error = $('.errors');
+            var succes = $('.success');
+            switch (id){
+                case 'loginForm':
+                    loginForm.css({ 'display': "none" });
+                    var $inputs = $('#loginForm :input');
+                    $inputs.each(function() {
+                        if ($(this).attr('type') === 'text' || $(this).attr('type') === 'password'){
+                            $(this).val('');
+                        }
+                    });
+                    break;
+                case 'registerForm':
+                    registerForm.css({ 'display': "none" });
+                    var $inputs = $('#registerForm :input');
+                    $inputs.each(function() {
+                        if ($(this).attr('type') === 'text' || $(this).attr('type') === 'password'){
+                            $(this).val('');
+                        }
+                    });
+                    $('select[name=provinces]').val('');
+                    break;
+            }
+            $('#modal-bg').css({ 'display': "none" });
+            error.html('');
+            succes.html('');
         });
         /**
          * Shows the popup joinActivity
@@ -141,8 +174,8 @@ Activeko.form = {
                     error.empty();
                     succes.empty();
                     if (errors.success === false){
-                        $.each( errors, function( key, value ) {
-                            (key == 'errors') ? html += '<span><p>' + value + '</p></span>' : '';
+                        $.each( errors.errors, function( key, value ) {
+                            html += '<span><p>' + value + '</p></span>';
                         });
                         error.append(html);
                     }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@include('includes.registerForm')
 @section('content')
+    @include('includes.registerForm')
     <div class="container-fluid">
         @include('includes.filterBar')
     </div>

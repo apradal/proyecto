@@ -1,34 +1,22 @@
 <div id="registerForm">
-
-    <h1>Formulario de registro</h1>
-
-    {!! Form::open(['url' => '/registerUser', 'id' => 'registerUserForm']) !!}
-
-    {{Form::label('email', 'Email: ')}}
-    {{Form::text('email', '', ['placeholder' => 'Ejemplo@gmail.com'])}}<br/>
-
-    {{Form::label('password', 'Contraseña: ')}}
-    {{Form::password('password', ['placeholder' => 'Contraseña secreta'])}}<br/>
-
-    {{Form::label('name', 'Nombre: ')}}
-    {{Form::text('name', '', ['placeholder' => 'José Antonio'])}}<br/>
-
-    {{Form::label('lastName', 'Apellidos: ')}}
-    {{Form::text('lastName', '', ['placeholder' => 'Prada Lara'])}}<br/>
-
-    {{Form::label('provinces', 'Provincia: ')}}
-    <select id="provinces"  name="provinces">
-            <option disabled selected value> Provincias </option>
-        @foreach ($provinces as $province)
-            <option value="{{ $province }}">{{ $province }}</option>
-        @endforeach
-    </select><br/>
-
-    {{Form::submit('Registrarse')}}
-
-    {!! Form::close() !!}
-
-    <div class="errors"></div>
-    <div class="success"></div>
-
+    <img class="icon cancel" src="{{URL::to('/images/002-cross.png')}}" alt="">
+    <div class="wrapper-table">
+        <h1 class="title-md">Formulario de registro</h1>
+        {!! Form::open(['url' => '/registerUser', 'id' => 'registerUserForm']) !!}
+        {{Form::text('email', '', ['placeholder' => 'Email: Ejemplo@gmail.com'])}}
+        {{Form::password('password', ['placeholder' => 'Contraseña secreta'])}}
+        {{Form::text('name', '', ['placeholder' => 'Nombre: José Antonio'])}}
+        {{Form::text('lastName', '', ['placeholder' => 'Apellidos: Prada Lara'])}}
+        <label for="provinces">Provincia:</label>
+        <select id="provinces"  name="provinces">
+                <option disabled selected value> Provincias </option>
+            @foreach ($provinces as $province)
+                <option value="{{ $province }}">{{ $province }}</option>
+            @endforeach
+        </select>
+        <input type="submit"  class="a-btn filled" value="Registrarse" id="Registrarse">
+        {!! Form::close() !!}
+        <div class="errors"></div>
+        <div class="success"></div>
+    </div>
 </div>
