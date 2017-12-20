@@ -21,7 +21,62 @@ time, mark, audio, video {
     list-style-type:none;
 }
 body{
-    background-color: #fff;
+    background-color: #ECECEA;
+    font-family: 'Courgette', cursive;
+}
+.Deportes{
+    background: linear-gradient(
+            rgba(20,20,20, .5),
+            rgba(20,20,20, .5)),
+            url(../images/deportes.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center
+}
+.Didáctica{
+    background: linear-gradient(
+            rgba(20,20,20, .5),
+            rgba(20,20,20, .5)),
+    url(../images/didactica.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center
+}
+.Hostelería{
+    background: linear-gradient(
+            rgba(20,20,20, .5),
+            rgba(20,20,20, .5)),
+    url(../images/hosteleria.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center
+}
+.Ocio{
+    background: linear-gradient(
+            rgba(20,20,20, .5),
+            rgba(20,20,20, .5)),
+    url(../images/ocio.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center
+}
+.Viajes{
+    background: linear-gradient(
+            rgba(20,20,20, .5),
+            rgba(20,20,20, .5)),
+    url(../images/viajes.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center
+}
+.Otros{
+    background: linear-gradient(
+            rgba(20,20,20, .5),
+            rgba(20,20,20, .5)),
+    url(../images/otros.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center
 }
 /** MODAL BLACK BG **/
 #modal-bg{
@@ -33,6 +88,9 @@ body{
     top: 0;
     left: 0;
     z-index: 9998;
+}
+.font{
+    font-family: 'Courgette', cursive;
 }
 #registerForm{
     display: none;
@@ -81,6 +139,16 @@ body{
 }
 .icon{
     width: 5%;
+}
+/** FOOTER **/
+#footer{
+    width: 100%;
+    background-color: #000;
+    height: 200px;
+    margin-top: 4%;
+}
+#footer h1 {
+    color: #fff;
 }
 /** HEADER **/
 #header{
@@ -282,6 +350,12 @@ body{
     width: 500px;
     height: 300px;
 }
+.wrapper-table{
+    display: table-cell;
+    vertical-align: middle;
+    width: 500px;
+    height: 300px;
+}
 .cancel{
     display: inline;
     position: absolute;
@@ -293,6 +367,12 @@ body{
     background-color: #fff;
     padding: 2% 0;
     color: red;
+}
+.errordelete{
+    display: none;
+}
+.successdelete{
+    display: none;
 }
 .success{
     background-color: #fff;
@@ -344,4 +424,256 @@ body{
 #registerForm select{
     background-color: #ECECEA;
     width: 65%;
+}
+/** MODAL LEAVE ACTIVITY **/
+#leaveActivity{
+    display: none;
+    z-index: 9999;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    max-width: 500px;
+    width: 100%;
+    border-radius: .25rem;
+    text-align: center;
+}
+#leaveForm{
+    display: inline-block;
+    margin-top: 2%;
+}
+#cancelLeaveActivity{
+    border: none;
+}
+/** MODAL JOIN ACTIVITY **/
+#joinActivity{
+    display: none;
+    z-index: 9999;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    max-width: 500px;
+    width: 100%;
+    border-radius: .25rem;
+    text-align: center;
+}
+#joinForm{
+    display: inline-block;
+    margin-top: 2%;
+}
+#cancelJoinActivity{
+    border: none;
+}
+/** MODAL DELETE ACTIVITY **/
+#delete-activity{
+    display: none;
+    z-index: 9999;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    max-width: 500px;
+    width: 100%;
+    border-radius: .25rem;
+    text-align: center;
+}
+/** CREATE ACTIVITY FORM **/
+#createActivityForm{
+    width: 100%;
+    margin-top: 5%;
+    border-radius: .25rem;
+    border: 2px solid #624D44;
+    background-color: #F5F3EE;
+}
+#createActivityForm h1{
+    margin: 2% 0;
+    text-align: center;
+}
+#createActivityForm form{
+    margin: auto;
+    max-width: 500px;
+    color: #624D44;
+    font-weight: bold;
+}
+#createActivityForm input{
+    border: none;
+    padding: 2%;
+    border-radius: .50rem;
+    width: 100%;
+}
+#createActivityForm input:focus{
+    outline-color: #624D44;
+}
+#createActivityForm label{
+    font-size: 1.1em;
+    margin: 2% 0;
+}
+#createActivityForm select{
+    border: none;
+    padding: 2%;
+    border-radius: .50rem;
+    width: 100%;
+}
+#createActivityForm select:focus{
+    outline-color: #624D44;
+}
+#createActivityForm textarea{
+    border: none;
+    padding: 2%;
+    border-radius: .50rem;
+    width: 100%;
+    resize: none;
+}
+#createActivityForm textarea:focus{
+    outline-color: #624D44;
+}
+#createActivityForm input[type=submit]{
+    color: #fff;
+    background-color: #624D44;
+    font-weight: bold;
+    margin: 3% 0;
+    cursor: pointer;
+    -webkit-transition: background-color 1s ease-out;
+    -moz-transition: background-color 1s ease-out;
+    -o-transition: background-color 1s ease-out;
+    transition: background-color 1s ease-out;
+}
+#createActivityForm input[type=submit]:hover{
+    background-color: #000;
+}
+#message{
+    margin-top: 2%;
+}
+/** USER PANEL **/
+.userpaneloptions{
+    height: 100%;
+    background-color: #74AFAD;
+    color: #fff;
+    font-weight: bold;
+}
+.userpaneloptions li{
+    padding: 5% 5%;
+    cursor: pointer;
+    background-color: #558C89;
+    border-bottom: 2px solid #fff;
+    -webkit-transition: background-color 1s ease-out, color 1s ease-out;
+    -moz-transition: background-color 1s ease-out, color 1s ease-out;
+    -o-transition: background-color 1s ease-out, color 1s ease-out;
+    transition: background-color 1s ease-out, color 1s ease-out;
+}
+.userpaneloptions li:hover{
+    color: #d58512;
+    background-color: #1f648b;
+}
+/** PERSONAL DATA **/
+#personaldata li{
+    padding: 10px;
+}
+#personaldata label{
+    font-weight: bold;
+    display: inline-block;
+    float: left;
+    width: 150px;
+}
+#personaldata input, #personaldata textarea, #personaldata select, #personaldata button{
+    width : 350px;
+    margin: 0;
+    border: none;
+    padding: 10px;
+    border-radius: .50rem
+}
+#personaldata input[type='submit']{
+    width: 100%;
+    max-width: 500px;
+}
+#personaldata .success{
+    background-color: #F5F3EE;
+    text-align: center;
+}
+#personaldata .errors{
+    background-color: #F5F3EE;
+    text-align: center;
+}
+.back-wrapper{
+    margin-top: 2%;
+    border: 2px solid #000;
+    border-radius: .50rem;
+    background-color: #F5F3EE;
+}
+#personaldata form{
+    width: 100%;
+    max-width: 750px;
+    margin: auto;
+    margin-bottom: 5%;
+}
+#activities-user .activity span{
+    font-weight: bold;
+    font-size: 110%;
+}
+.activity-form-creator{
+    cursor: pointer;
+}
+#activities-user .activity{
+    font-size: 110%;
+    -webkit-transition: color 1s ease-out;
+    -moz-transition:  color 1s ease-out;
+    -o-transition: color 1s ease-out;
+    transition: color 1s ease-out;
+}
+#activities-user .activity:hover h2{
+    color: #d58512;
+}
+#activities-user .leaveButton{
+    margin-top: 3%;
+    width: 100%;
+    max-width: 500px;
+    z-index: 9999;
+}
+/** USER ADMIN ACTIVITY **/
+.row.fila{
+    padding: 10px 0;
+}
+#edit-form{
+    margin-top: 5%;
+}
+#edit-form span{
+    font-weight: bold;
+    display: inline-block;
+    width: 100%;
+    margin-top: 30px;
+}
+#edit-form label{
+    font-weight: bold;
+    display: inline-block;
+    float: left;
+    width: 250px;
+}
+#edit-form input, #edit-form textarea, #edit-form select, #edit-form button{
+    width : 300px;
+    margin: 0;
+    border: none;
+    padding: 10px;
+    border-radius: .50rem
+}
+.buttons-center{
+    text-align: center;
+    border-bottom: 1px solid #000;
+    padding-bottom: 5%;
+}
+.users h3{
+    border-bottom: 1px solid #000;
+    display: inline;
+}
+.users span{
+    font-weight: bold;
+}
+.users li{
+    padding: 2%;
+    margin: 2% 0;
+    background-color: #E5BE40;
+    border-radius: .25rem;
 }

@@ -33,6 +33,9 @@ Activeko.form = {
             var id = ($(this).parent()[0].id);
             var loginForm = $('#loginForm');
             var registerForm = $('#registerForm');
+            var leaveActivity = $('#leaveActivity');
+            var joinActivity = $('#joinActivity');
+            var deleteActivity = $("#delete-activity");
             var error = $('.errors');
             var succes = $('.success');
             switch (id){
@@ -55,6 +58,15 @@ Activeko.form = {
                     });
                     $('select[name=provinces]').val('');
                     break;
+                case 'leaveActivity':
+                    leaveActivity.css({'display':'none'});
+                    break;
+                case 'joinActivity':
+                    joinActivity.css({'display':'none'});
+                    break;
+                case 'delete-activity':
+                    deleteActivity.css({'display':'none'});
+                    break
             }
             $('#modal-bg').css({ 'display': "none" });
             error.html('');
@@ -67,10 +79,11 @@ Activeko.form = {
         $(document).on('click', '.joinButton', function (event) {
             var joinActivity = $('#joinActivity'),
                 activityId = $('#activityId');
-            $getActivityTitle = $('#'+ event.target.id).prev().children('h2').html();
+            $getActivityTitle = $('#'+ event.target.id).prev().siblings('h2').html();
             $('#joinActivityTitle').html('Está apunto de unirse a la actividad: ' + $getActivityTitle);
             activityId.val(event.target.id);
-            joinActivity.css({ 'display' : 'block'});
+            joinActivity.fadeIn(2000);
+            $('#modal-bg').fadeIn(1500);
         });
         /**
          * Hides the popup joinActivity
@@ -79,6 +92,7 @@ Activeko.form = {
         $(document).on('click', '#cancelJoinActivity', function (event) {
             var joinActivity = $('#joinActivity');
             joinActivity.css({ 'display': "none" });
+            $('#modal-bg').css({'display':'none'});
         });
         /**
          * show the popup leaveActivity
@@ -90,7 +104,8 @@ Activeko.form = {
             $getActivityTitle = $('#'+ event.target.id).prev().children('h2').html();
             $('#joinActivityTitle').html('Está apunto de salirse de la actividad: ' + $getActivityTitle);
             activityId.val(event.target.id);
-            leaveActivity.css({ 'display' : 'block'});
+            leaveActivity.fadeIn(2000);
+            $('#modal-bg').fadeIn(1500);
         });
         /**
          * Hides the popup leaveActivity
@@ -99,13 +114,16 @@ Activeko.form = {
         $(document).on('click', '#cancelLeaveActivity', function (event) {
             var leaveActivity = $('#leaveActivity');
             leaveActivity.css({ 'display': "none" });
+            $('#modal-bg').css({ 'display': "none" });
         });
         $(document).on('click', '#delete-activity-button', function (event) {
             event.preventDefault();
-            $('#delete-activity').css({'display':'block'});
+            $('#delete-activity').fadeIn(2000);
+            $('#modal-bg').fadeIn(1500);
         });
         $('#cancel-delete-activity-b').on('click', function () {
             $('#delete-activity').css({'display':'none'});
+            $('#modal-bg').css({'display':'none'});
         });
     }, // END Listeners
     ajaxs : function () {
@@ -302,33 +320,41 @@ Activeko.form = {
          * Ajax which deletes activity.
          */
         $('#delete-activity-b').on('click', function () {
-            var error = $('.errors'),
-                succes = $('.success');
+            var error = $('.errordelete');
+            var succes = $('.successdelete');
             $.ajax({
                 url: '/deleteactivity',
                 data: $('#edit-form').serialize(),
                 type: 'get',
                 dataType: 'json',
                 success: function(response){
+                    $('#delete-activity').css({'display':'none'});
+                    $('#modal-bg').css({'display':'none'});
                     error.empty();
                     succes.empty();
                     if (response.success === true){
                         if (response.admin === true) {
-                            succes.append('<span><p>Actividad eliminada.</p></span>');
+                            succes.append('Actividad eliminada.');
+                            succes.css({'display':'block'});
                             setTimeout(window.location = '/admin', 4000);
                         } else {
+                            succes.append('Actividad eliminada.');
+                            succes.css({'display':'block'});
                             setTimeout(window.location = '/', 4000);
                         }
                     }
                 },
                 error: function(response) { // What to do if we fail
+                    $('#delete-activity').css({'display':'none'});
+                    $('#modal-bg').css({'display':'none'});
                     var errors = response.responseJSON;
                     error.html("");
                     var html = '';
                     $.each( errors.errors, function( key, value ) {
-                        html += '<span><p>' + value + '</p></span>';
+                        html += value + '<br/>';
                     });
                     error.append(html);
+                    error.css({'display':'block'});
                 }
             });
         });

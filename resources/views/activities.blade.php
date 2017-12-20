@@ -1,22 +1,22 @@
 @extends('layouts.app')
-
 @section('content')
     <div id="container">
-        <div class="errors">
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <div>{{ $error }}</div>
-                @endforeach
-            @endif
+        @if ($errors->any())
+        <div>
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger" style="margin: 1% 0">{{ $error }}</div>
+            @endforeach
         </div>
-        <div class="success"></div>
+        @endif
         @if(Auth::check())
             @include('includes.editActivity')
             @include('includes.users')
             @include('includes.deleteActivity')
         @else
-            <h2>Ops!!! no se como ha llegado hasta aquí.</h2>
-            <p>No se lo cuente a nuestros jefes, algunos desarrolladores llevan días sin comer</p>
+            <div class="container" style="text-align: center">
+                <h2 class="title" style="margin-top: 5%">Ops!!! no se como ha llegado hasta aquí.</h2>
+                <p>No se lo cuente a nuestros jefes, algunos desarrolladores llevan días sin comer</p>
+            </div>
         @endif
     </div>
 @endsection

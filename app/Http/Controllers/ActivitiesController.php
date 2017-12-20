@@ -26,13 +26,12 @@ class ActivitiesController
      * Saves on the DB the activitie and the association
      */
     public function create(Request $request){
-        //create new activity model
         $activity = new Activity;
-        //validates the data (includes check if email already exists in db)
-        $validator = Validator::make($request->all(),[
+        $inputs = $request->all();
+        $rules = [
             'title' => 'required',
             'startDate' => 'required|date',
-            'endDate' => 'required|date',
+            'endDate' => 'required|date|gtdate',
             'types' => 'required',
             'provinces' => 'required',
             'poblation' => 'required',
@@ -43,16 +42,17 @@ class ActivitiesController
             ),
             'endHour' => array(
                 'required',
+                'gt',
                 'regex:/^(([0-1][0-9]|2[0-3]):[0-5][0-9])$/'
             ),
             'description' => 'required',
             'participants' => 'required',
-        ],
-        [
+        ];
+        $messages = [
             'title.required' => 'El título es obligatorio.',
             'startDate.required' => 'La fecha de inicio es obligatoria.',
             'startDate.date' => 'La fehca de inicio debe ser formato fecha',
-            'endDate.required' => 'La fecha din es obligatoria',
+            'endDate.required' => 'La fecha fin es obligatoria',
             'endDate.date' => 'La fehca fin debe ser formato fecha.',
             'types.required' => 'El tipo de actividad es obligatorio.',
             'provinces.required' => 'La provincia es obligatoria.',
@@ -64,8 +64,21 @@ class ActivitiesController
             'endHour.timezone' => 'La hora fin debe ser formato horas.',
             'description.required' => 'La descripción es obligatoria.',
             'participants.required' => 'Debe indicar el número máximo de participantes',
-        ]);
-
+            'endHour.gt' => 'La hora fin debe ser mayor que la hora inicial',
+            'endDate.gtdate' => 'La fecha fin no puede ser menor que la inicial',
+        ];
+        /* EXTENSION TO CALCULATE GTS AND LTS */
+        Validator::extend('gt', function(){
+            $end = $_REQUEST['endHour'];
+            $start = $_REQUEST['startHour'];
+            return Utils::gtTime($end, $start);
+        });
+        Validator::extend('gtdate', function(){
+            $end = $_REQUEST['endDate'];
+            $start = $_REQUEST['startDate'];
+            return Utils::gtDate($end, $start);
+        });
+        $validator = Validator::make($request->all(),$rules,$messages);
         //if something is wrong
         if ($validator->fails()){
             return redirect('/createactivityform')->withErrors($validator)->withInput();

@@ -6,7 +6,7 @@
                     <?php $datesFormated = \App\Http\Middleware\Utils::changeDateFormat(array($activity->fecha_inicio, $activity->fecha_fin))?>
                     <?php $userIn = false ?>
                     <?php $notFull = true ?>
-                    <li class="activity<?php echo ' .' . $activity->estado ?>">
+                    <li class="activity<?php echo ' ' . $activity->estado . ' ' . $activity->tipo ?>">
                         <h2 class="title title-activity">{{ $activity->titulo }}</h2>
                         <span class="estado">{{$activity->estado}}</span>
                         <div class="clear"></div>

@@ -17,6 +17,7 @@
             @include('includes.loginForm')
         </div>
         @yield('content')
+        @include('includes.footer')
         <script src="{{ asset('js/myJs.js') }}"></script>
     </body>
 </html>

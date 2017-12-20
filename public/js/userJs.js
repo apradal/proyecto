@@ -42,10 +42,13 @@ Activeko.user = {
                     break;
             }
         });
-        $('.activity').each(function () {
+        $('.activity-form-creator').each(function () {
             $(this).on('click', function () {
-                $(this).children().submit();
+                $(this).submit();
             });
+        });
+        $(document).on('click', '.icon.cancel', function () {
+            $('#leaveActivity').css({'display':'none'});
         });
     },
     ajaxs : function () {

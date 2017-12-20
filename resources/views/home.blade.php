@@ -5,14 +5,12 @@
         @include('includes.filterBar')
     </div>
     <div class="container">
+        @if(session('message'))
+            <div id="message" class="alert alert-success">{{session('message')}}</div>
+        @endif
         <ul id="activities">
             @include('includes.activities')
         </ul>
-        @if(session('message'))
-            {{--aqui quiero poner una x de icono y con css aparecera en medio y se podra cerrar--}}
-            {{--saca el mensaje activdad creada--}}
-            <div id="message">{{session('message')}}</div>
-        @endif
         @include('includes.joinActivity')
         @include('includes.leaveActivity')
     </div>
