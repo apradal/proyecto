@@ -78,6 +78,39 @@ body{
     background-repeat: no-repeat;
     background-position: center center
 }
+.container-fluid{
+    padding: 0;
+}
+/** PORTADA **/
+#portada{
+    height: 400px;
+    width: 100%;
+    background-image: url(../images/portada2.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.messagePortada{
+    width: 400px;
+    height: 300px;
+    background-color: #BF9F63;
+    position: relative;
+    left: 50%;
+    top: 10%;
+    border-radius: 0 25%;
+    display: flex;
+    align-items: center;
+}
+.messagePortada h1{
+    color: #fff;
+    font-size: 190%;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0;
+    border-bottom: 2px solid white;
+    border-top: 2px solid white;
+}
 /** MODAL BLACK BG **/
 #modal-bg{
     display: none;
@@ -218,6 +251,14 @@ body{
 .filter-main{
     background-color: #78A4A1;
 }
+.fixed{
+    background-color: #78A4A1;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    top: 0;
+    margin: 0;
+}
 #filterBar input[type=date], select{
     border-radius: .25rem;
     padding: 5px;
@@ -251,6 +292,12 @@ body{
 /** MAIN ACTIVITIES **/
 #activities{
     margin: 3%;
+}
+.activity-title{
+    text-align: center;
+    border-bottom: 1px solid black;
+    margin: 30px;
+    padding: 10px 0;
 }
 .activity{
     padding: 2%;

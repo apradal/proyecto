@@ -125,6 +125,14 @@ Activeko.form = {
             $('#delete-activity').css({'display':'none'});
             $('#modal-bg').css({'display':'none'});
         });
+        $(document).scroll(function(){
+            var st = $(this).scrollTop();
+            if(st > 180) {
+                $(".filter-main").addClass('fixed');
+            } else {
+                $(".filter-main").removeClass('fixed');
+            }
+        });
     }, // END Listeners
     ajaxs : function () {
         /**
