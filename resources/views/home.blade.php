@@ -15,7 +15,6 @@
             <div id="message" class="alert alert-success">{{session('message')}}</div>
         @endif
         <ul id="activities">
-            <h1 class="title activity-title">Actividades Recientes</h1>
             @include('includes.activities')
         </ul>
         @include('includes.joinActivity')

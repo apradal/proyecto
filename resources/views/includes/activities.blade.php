@@ -1,4 +1,5 @@
 <div class="container">
+    <h1 class="title activity-title">Actividades Recientes</h1>
         @if(!$activities->isEmpty())
             @foreach($activities as $activity)
             <div class="row">

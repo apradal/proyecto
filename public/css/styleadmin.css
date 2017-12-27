@@ -1,0 +1,36 @@
+header{
+    background: #434444;
+    font-family: 'Courgette', cursive;
+}
+#userPanel{
+    display: block;
+}
+/** ADMIN ACTIVITY FILTER BAR **/
+#id{
+    width: 40px;
+}
+#filter-admin-bar{
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #74AFAD;
+    border-radius: .25rem;
+}
+/** ADMIN USER FILTER BAR **/
+#user-admin-bar{
+    padding: 15px;
+    margin: 10px 0;
+    width: 95%;
+    background-color: #74AFAD;
+    border-radius: .25rem;
+}
+.user{
+    width: 95%;
+    border: 2px solid #d3d3d3;
+    border-radius: .25rem;
+    padding: 40px;
+    box-shadow: 4px 5px #d2d2d2
+}
+.delete-user-btn{
+    margin: 30px auto;
+    width: 90%;
+}

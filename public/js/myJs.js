@@ -127,7 +127,7 @@ Activeko.form = {
         });
         $(document).scroll(function(){
             var st = $(this).scrollTop();
-            if(st > 180) {
+            if(st > 142) {
                 $(".filter-main").addClass('fixed');
             } else {
                 $(".filter-main").removeClass('fixed');

@@ -86,7 +86,6 @@ body{
     height: 400px;
     width: 100%;
     background-image: url(../images/portada2.jpg);
-    background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -179,9 +178,18 @@ body{
     background-color: #000;
     height: 200px;
     margin-top: 4%;
+    color: #ECECEA;
 }
-#footer h1 {
-    color: #fff;
+#footer .sub{
+    border-bottom: 1px solid #ECECEA;
+}
+#footer .f1{
+    height: 200px;
+    position: relative;
+}
+#footer .column-footer{
+    margin-top: 50px;
+    margin-left: 50px;
 }
 /** HEADER **/
 #header{
@@ -310,6 +318,7 @@ body{
     -moz-transition: border 1s ease-out;
     -o-transition: border 1s ease-out;
     transition: border 1s ease-out;
+    cursor: pointer;
 }
 .activity:hover{
     border: 2px solid #d58512;
@@ -613,6 +622,27 @@ body{
     transition: background-color 1s ease-out, color 1s ease-out;
 }
 .userpaneloptions li:hover{
+    color: #d58512;
+    background-color: #1f648b;
+}
+/** ADMIN PANEL **/
+.adminpanel-options{
+    height: 100%;
+    background-color: #74AFAD;
+    color: #fff;
+    font-weight: bold;
+}
+.adminpanel-options li{
+    padding: 5% 5%;
+    cursor: pointer;
+    background-color: #558C89;
+    border-bottom: 2px solid #fff;
+    -webkit-transition: background-color 1s ease-out, color 1s ease-out;
+    -moz-transition: background-color 1s ease-out, color 1s ease-out;
+    -o-transition: background-color 1s ease-out, color 1s ease-out;
+    transition: background-color 1s ease-out, color 1s ease-out;
+}
+.adminpanel-options li:hover{
     color: #d58512;
     background-color: #1f648b;
 }

@@ -17,5 +17,5 @@
         </li>
     @endforeach
 @else
-    <h2>No existen actividades con estos filtros de búsqueda</h2>
+    <h2 class="title" style="text-align: center">No existen actividades con estos filtros de búsqueda</h2>
 @endif

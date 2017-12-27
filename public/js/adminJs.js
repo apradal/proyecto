@@ -30,13 +30,13 @@ Activeko.admin = {
         $('#activities-option').on('click', function () {
             userfilter.css({'display':'none'});
             users.css({'display':'none'});
-            filterbar.css({'display':'block'});
+            filterbar.css({'display':'inline-block'});
             activities.css({'display':'block'});
         });
         $('#users-option').on('click', function () {
             filterbar.css({'display':'none'});
             activities.css({'display':'none'});
-            userfilter.css({'display':'block'});
+            userfilter.css({'display':'inline-block'});
             users.css({'display':'block'});
         });
     },
