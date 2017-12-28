@@ -12,10 +12,14 @@
     </head>
     <body>
         <div id="modal-bg"></div>
-        <div id="header" class="container-fluid">
-            @include('includes.loginPanel')
-            @include('includes.loginForm')
-        </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 no-padding">
+                    <div id="header">
+                        @include('includes.loginPanel')
+                        @include('includes.loginForm')
+                    </div>
+                </div>
+            </div>
         @yield('content')
         @include('includes.footer')
         <script src="{{ asset('js/myJs.js') }}"></script>

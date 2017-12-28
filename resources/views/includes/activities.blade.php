@@ -3,7 +3,7 @@
         @if(!$activities->isEmpty())
             @foreach($activities as $activity)
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-12 col-xs-12">
                     <?php $datesFormated = \App\Http\Middleware\Utils::changeDateFormat(array($activity->fecha_inicio, $activity->fecha_fin))?>
                     <?php $userIn = false ?>
                     <?php $notFull = true ?>

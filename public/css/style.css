@@ -253,11 +253,16 @@ body{
     color: #fff;
     font-family: 'Courgette', cursive;
 }
+#filterBar li {
+    display: inline;
+}
 #filterBar *{
     margin-left: 10px;
 }
 .filter-main{
     background-color: #78A4A1;
+    width: 100%;
+    margin: 0;
 }
 .fixed{
     background-color: #78A4A1;
@@ -753,4 +758,63 @@ body{
     margin: 2% 0;
     background-color: #E5BE40;
     border-radius: .25rem;
+}
+
+.no-padding{
+    padding: 0 !important;
+}
+
+/** MOBILE **/
+@media screen and (max-width: 768px){
+
+    /** GENERAL **/
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    /** HEADER **/
+    .logo {
+        display: none;
+    }
+
+    #userPanel .title{
+        display: block;
+    }
+    #user-options{
+        margin: 10px auto;
+        width: 100%;
+    }
+
+    /** LOGIN FORM **/
+    #loginForm {
+        max-width: 300px;
+        transform: translate(-57%, -50%);
+    }
+
+    /** REGISTER FORM **/
+    #registerForm {
+        max-width: 300px;
+        transform: translate(-57%, -50%);
+    }
+
+    /** FILTER BAR **/
+    #filterBar {
+        margin: 0;
+        padding: 20px 0;
+        width: 100%;
+    }
+    #filterBar * {
+        margin: 0;
+    }
+
+    .messagePortada {
+        background: none;
+        text-align: center;
+        width: 80%;
+        margin: 0 auto;
+        left: 0;
+        top: 0;
+    }
+
 }
