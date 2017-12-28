@@ -83,6 +83,8 @@ class ActivitiesController
         if ($validator->fails()){
             return redirect('/createactivityform')->withErrors($validator)->withInput();
         } else {
+            //get lat and long
+            $coordinates = $this->getCoordinates( $request->input('street'), $request->input('poblation'), $request->input('provinces'));
             //insert activity
             $activity->titulo = $request->input('title');
             $activity->descripcion = $request->input('description');
@@ -98,20 +100,68 @@ class ActivitiesController
             $activity->id_creator = Auth::id();
             $activity->num_participantes = 1;
             $activity->max_participantes = $request->input('participants');
+            $activity->lat = $coordinates['lat'];
+            $activity->lng = $coordinates['lng'];
 
             //save activity and create the relationship
             if($activity->save()){
                 $this->createRelation($activity, 'creador');
-//                //busco usuario con la id actual
-//                $user = User::where('id', Auth::id())->first();
-//                //aqui hago que inserte la relación en la tabla.
-//                $user->activities()->attach($activity->id);
-//                //a mano updateo la tabla para decir que es creador.
-//                DB::table('activity_user')
-//                    ->where(['user_id' => $user->id, 'activity_id' => $activity->id])
-//                    ->update(['user_role' => 'creador']);
                 return redirect('/')->with('message', 'Actividad creada!');
             };
+        }
+    }
+
+    protected function getCoordinates($direccion, $poblacion, $ciudad)
+    {
+        $dataToSend = [
+            'direccion' => $direccion,
+            'poblacion' => $poblacion,
+            'ciudad' => $ciudad
+        ];
+        $url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+        if (strtolower($poblacion) === strtolower($ciudad)) {
+            unset($dataToSend['poblacion']);
+        }
+
+        foreach ($dataToSend as $data => $value){
+            $dataToSend[$data] = str_replace(" ","+", $value);
+            if ($data === 'direccion') {
+                $url .= $dataToSend[$data];
+            } else {
+                $url .= ',+' . $dataToSend[$data];
+            }
+        }
+        $url .= "&key=AIzaSyBUh8_x0jL_YxfXFQq-TyeofYqyVEToM60";
+        $coordinates = $this->callGoogleCoordinates($url);
+
+        if ($coordinates){
+            return $coordinates;
+        } else {
+            return false;
+        }
+
+    }
+
+    protected function callGoogleCoordinates($url)
+    {
+        //  Initiate curl
+        $ch = curl_init();
+        // Disable SSL verification
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        // Will return the response, if false it print the response
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // Set the url
+        curl_setopt($ch, CURLOPT_URL,$url);
+        // Execute
+        $result=curl_exec($ch);
+        // Closing
+        curl_close($ch);
+
+        $arrayData = json_decode($result, true);
+        if ($arrayData['status'] === 'OK') {
+            return $arrayData['results'][0]['geometry']['location'];
+        } else {
+            return false;
         }
     }
 

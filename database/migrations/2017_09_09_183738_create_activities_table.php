@@ -27,9 +27,11 @@ class CreateActivitiesTable extends Migration
             $table->string('hora_inicio');
             $table->string('hora_fin')->nullable();
             $table->integer('id_creator');
-            $table->string('mensaje_admin');
+            $table->string('mensaje_admin')->nullable();
             $table->integer('max_participantes');
             $table->integer('num_participantes');
+            $table->string('lat')->nullable();
+            $table->string('lng')->nullable();
             $table->timestamps();
         });
     }

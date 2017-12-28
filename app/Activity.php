@@ -20,7 +20,9 @@ class Activity extends Model
         'direccion',
         'hora_inicio',
         'hora_fin',
-        'max_participantes'
+        'max_participantes',
+        'lat',
+        'lng'
     ];
 
     /**
