@@ -81,6 +81,9 @@ body{
 .container-fluid{
     padding: 0;
 }
+.active {
+    display: block !important;
+}
 /** PORTADA **/
 #portada{
     height: 400px;
@@ -774,6 +777,26 @@ body{
     padding: 0 !important;
 }
 
+#menu-icon {
+    display: none;
+}
+#menu-icon div {
+    width: 35px;
+    height: 5px;
+    background-color: #fff;
+    margin: 6px 0;
+}
+
+#activities .container-fluid {
+    width: 80%;
+}
+
+/** ADMIN **/
+#userdelete li, #adminForm li {
+    display: inline-block;
+}
+
+
 /** MOBILE **/
 @media screen and (max-width: 768px){
 
@@ -784,7 +807,12 @@ body{
     }
 
     /** HEADER **/
-    .logo {
+    #userPanel {
+        width: 100%;
+        padding: 0;
+    }
+
+    #user-options span ,.logo {
         display: none;
     }
 
@@ -799,13 +827,25 @@ body{
     /** LOGIN FORM **/
     #loginForm {
         max-width: 300px;
-        transform: translate(-57%, -50%);
     }
 
     /** REGISTER FORM **/
     #registerForm {
         max-width: 300px;
-        transform: translate(-57%, -50%);
+    }
+
+    /** LEAVE MODAL **/
+    #leaveActivity {
+        max-width: 300px;
+    }
+    /** JOIN MODAL **/
+    #joinActivity {
+        max-width: 300px;
+    }
+
+    /** DELETE ACTIVITY MODAL **/
+    #delete-activity {
+        max-width: 300px;
     }
 
     /** FILTER BAR **/
@@ -818,6 +858,18 @@ body{
         margin: 0;
     }
 
+    #filterBar ul {
+        display: none;
+    }
+
+    #menu-icon {
+        display: block;
+    }
+
+    #filterBar ul li {
+        display: block;
+    }
+
     .messagePortada {
         background: none;
         text-align: center;
@@ -827,4 +879,88 @@ body{
         top: 0;
     }
 
+    .cover {
+        background: none;
+        padding: 0;
+        text-align: unset;
+    }
+
+    .cover li * {
+        width: 100%;
+        margin: 5px 0 !important;
+    }
+
+    #activities {
+        margin: 0;
+    }
+
+    #activities .col-sm-12 {
+        padding: 0;
+    }
+
+    .activity .row .col-sm-4 {
+        display: none;
+    }
+
+    .activity {
+        border: none;
+        border-radius: 0;
+    }
+
+    /** FOOTER **/
+    #footer {
+        height: 100%;
+    }
+
+    #footer .f1 {
+        height: 100%;
+    }
+
+    #footer .column-footer {
+        margin-left: 0;
+    }
+
+    #activities .container-fluid {
+        width: 100%;
+    }
+
+    /** CREATE ACTIVITY **/
+    #createActivityForm {
+        padding: 2%;
+    }
+
+    /** EDIT ACTIVITY USER **/
+    .buttons-center input {
+        width: 100% !important;
+        margin: 5px 0 !important;
+    }
+
+    .care {
+        display: block;
+    }
+
+    /** ADMIN **/
+    #adminForm ul {
+        display: none;
+    }
+
+    #adminForm li, #userdelete li {
+        display: block;
+    }
+
+    #userdelete ul {
+        display: none;
+    }
+
+    #user-admin-bar {
+        width: 100% !important;
+    }
+
+    #filter-admin-bar {
+        width: 100%;
+    }
+
+    #users .user {
+        width: 100%;
+    }
 }

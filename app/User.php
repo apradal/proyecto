@@ -37,7 +37,7 @@ class User extends Authenticatable
      * Get the activities associated by id
      */
     public function activities(){
-                                    //'App\Activity'
+
         return $this->belongsToMany(Activity::class);
     }
 }

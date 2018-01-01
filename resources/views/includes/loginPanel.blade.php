@@ -2,7 +2,7 @@
     <a class="logo" href="{{ url('/')}}"><img src="{{ URL::to('/images/logo-mini.png') }}" alt="logo"></a>
     <span class="title">Activeko</span>
     <div id="user-options">
-        @if(Auth::check() && Auth::user()->nombre == 'Admin' && Auth::id() === 3)
+        @if(Auth::check() && Auth::user()->nombre == 'Admin' && Auth::id() === 1)
         <span>Usuario: {{Auth::user()->nombre}}</span>
         <a href="{{ url('/admin') }}" class="header-a">Administrar</a>
         {!! Form::open(['url' => '/logoutuser', 'id' => 'logoutUserForm']) !!}

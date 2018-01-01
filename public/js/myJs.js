@@ -133,6 +133,9 @@ Activeko.form = {
                 $(".filter-main").removeClass('fixed');
             }
         });
+        $(document).on('click', '#menu-icon', function () {
+            $('.cover').find('ul').toggleClass('active');
+        });
     }, // END Listeners
     ajaxs : function () {
         /**

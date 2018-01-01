@@ -39,6 +39,9 @@ Activeko.admin = {
             userfilter.css({'display':'inline-block'});
             users.css({'display':'block'});
         });
+        $(document).on('click', '#menu-icon', function () {
+            $('.cover').find('ul').toggleClass('active');
+        });
     },
     ajaxs: function () {
         /**

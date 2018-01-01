@@ -10,7 +10,7 @@
             </div>
         @endif
     </div>
-    <div class="container">
+    <div class="container-fluid">
         @if(session('message'))
             <div id="message" class="alert alert-success">{{session('message')}}</div>
         @endif

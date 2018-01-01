@@ -235,11 +235,20 @@ class UserController extends Controller
         $id = $request->input('id');
         if ($id != null) {
             $user = User::find($id);
+            $this->deleteUserActivities($user);
             if ($user->delete()) {
                 return redirect('/admin')->with('message', 'Usuario eliminado!');
             } else {
                 return redirect('/admin')->withErrors('No se ha eliminado el usuario.')->withInput();
             }
+        }
+    }
+
+    protected function deleteUserActivities($user)
+    {
+        $activities = $user->activities;
+        foreach ($activities as $activity) {
+            $activity->delete();
         }
     }
 }

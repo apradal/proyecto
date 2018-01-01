@@ -2,6 +2,11 @@
     <div class="col-sm-12">
         <div id="filterBar">
             <div class="cover">
+                <div id="menu-icon">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
                 <ul>
                     <li><span class="filter-label">BUSQUEDA</span></li>
                     <li>
