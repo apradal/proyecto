@@ -78,8 +78,9 @@ Activeko.form = {
          */
         $(document).on('click', '.joinButton', function (event) {
             var joinActivity = $('#joinActivity'),
-                activityId = $('#activityId');
-            $getActivityTitle = $('#'+ event.target.id).prev().siblings('h2').html();
+                activityId = $('#activityId'),
+                title = $('.activityid' + event.target.id);
+                $getActivityTitle = title.html();
             $('#joinActivityTitle').html('Está apunto de unirse a la actividad: ' + $getActivityTitle);
             activityId.val(event.target.id);
             joinActivity.fadeIn(2000);

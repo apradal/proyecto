@@ -315,7 +315,7 @@ body{
     background-color: #ddd;
 }
 .map-no {
-    background-color: black;
+    background-image: url("../images/nomap.PNG");
     width: 100%;
     height: 100%;
 }
