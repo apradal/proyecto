@@ -4,7 +4,7 @@
         <?php foreach ($activities as $activity) : ?>
         <?php $datesFormated = \App\Http\Middleware\Utils::changeDateFormat(array($activity->fecha_inicio, $activity->fecha_fin))?>
         <li class="activity <?php echo $activity->tipo?>">
-            @if ($activity->id_creator === Auth::id())
+            @if ($activity->id_creator == Auth::id())
                 {!! Form::open(['url' => '/activityuser', 'class' => 'activity-form-creator', 'method' => 'get']) !!}
             @else
                 {!! Form::open(['url' => '/activityuser', 'class' => 'activity-form', 'method' => 'get']) !!}

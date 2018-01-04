@@ -98,7 +98,7 @@
     <div class="row fila">
         <div class="col-sm-12">
             <div class="buttons-center">
-                @if (Auth::user()->id === $activity->id_creator || Auth::user()->email === 'admin@proyecto.com')
+                @if (Auth::user()->id == $activity->id_creator || Auth::user()->email == 'admin@proyecto.com')
                     <input type="submit" name="edit" value="Editar" class="filled btn-form"/>
                     <input type="submit" id="delete-activity-button" name="delete" value="Eliminar" class="filled btn-form"/>
                 @endif
