@@ -40,7 +40,7 @@ Route::get('/admingetactivities', 'AdminController@getActivities');
 Route::get('/activityadmin', 'AdminController@getActivityIndex');
 
 /** TEST STUFF */
-Route::get('/prueba', 'MainController@pruebas');
+Route::get('/cron', 'MainController@cron');
 
 /* TODO: Aquí apunto todo lo que tengo pendiente de hacer
     sección admin, eliminar actividades, editar actividades, eliminar users.

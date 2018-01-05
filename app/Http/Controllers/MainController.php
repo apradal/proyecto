@@ -160,7 +160,7 @@ class MainController extends Controller
 
     }
 
-    public function pruebas(){
+    public function cron(){
 
         $activities = Activity::all();
         foreach ($activities as $activity) {
